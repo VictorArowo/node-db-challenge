@@ -5,12 +5,14 @@ export const getAll = () => {
 };
 
 export const getOne = id => {
-  return db('projects').where('id', '=', id);
+  return db('projects')
+    .where('id', '=', id)
+    .first();
 };
 
 export const postOne = async body => {
   let [id] = await db('projects').insert(body);
-  return getOne(id);
+  return db('projects').where('id', '=', id);
 };
 
 export const addTask = async (id, body) => {
